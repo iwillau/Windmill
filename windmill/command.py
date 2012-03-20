@@ -1,0 +1,3 @@
+
+def command():
+    print 'Windmilling'

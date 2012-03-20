@@ -3,12 +3,14 @@ setup(
     name = "Windmill",
     version = "0.1",
     packages = find_packages(),
-    scripts = ['windmill.py'],
 
     install_requires = [
         'docutils>=0.3',
         'markdown',
         'mako',
+    ],
+
+    setup_requires = [
     ],
 
     package_data = {
@@ -23,5 +25,11 @@ setup(
     license = "BSD",
     keywords = "blog html website",
     url = "http://iwill.id.au/windmill/",   # project home page, if any
+    zip_safe = True,
 
+    entry_points = {
+        'console_scripts': [
+            'windmill = windmill.command:command',
+            ],
+        },
 )
