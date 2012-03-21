@@ -7,3 +7,8 @@ Because the site is generated it can be served with minimal resources, but still
 ## Recommended Technologies
  * Disqus
  * Google CDN
+
+## Future Ideas
+ * Process CSS files as well, including minifiying and gziping them.
+ * Ditto for JS files
+ * Other Page types?

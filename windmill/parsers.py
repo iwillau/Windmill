@@ -8,6 +8,7 @@ class Markdown:
     def __init__(self):
         self.markdown = MarkdownParser(
                             output_format='html5',
+                            extensions = ['tables'],
                         )
     def parse(self, fp):
         meta = {}
