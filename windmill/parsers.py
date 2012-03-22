@@ -28,8 +28,6 @@ class Markdown:
         
         content = self.markdown.convert(''.join(read_file()))
         self.markdown.reset()
-        if 'type' not in meta:
-            raise ValueError('File does not have a type specified')
-        pagetype = meta.pop('type')
+        pagetype = meta.pop('type', 'templated') # Default Pagetype
         return pagetype, meta, content
 
