@@ -44,7 +44,6 @@ class Templated(Page):
             # Check for / and generate path otherwise
 
         self.template = generator.templates.get_template(template_name)
-        print template_name
 
     def render(self, **kwargs):
         return self.template.render(windmill=self.generator, page=self)
