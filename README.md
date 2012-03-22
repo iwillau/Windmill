@@ -7,3 +7,7 @@ Because the site is generated it can be served with minimal resources, but still
 ## Recommended Technologies
  * Disqus
  * Google CDN
+
+## Proposed Extensions/Additions
+ * The Ability to specify a template to be rendered in the ini, without required a markup file.
+ * Some sort of automatic minification/gzip of CSS and JS files.
