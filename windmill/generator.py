@@ -86,7 +86,7 @@ class Generator:
                 break
         if generate_time:
             fp = open(generated_file,'w')
-            # fp.write(generate_time.strftime('%d/%m/%Y %H:%M:%S'));
+            fp.write(generate_time.strftime('%d/%m/%Y %H:%M:%S'));
             fp.close()
 
     def generate_all(self, pages):
