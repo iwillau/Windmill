@@ -80,11 +80,15 @@ class Generator:
         # We check the mtimes here, to try and keep the check as 
         # 'light' as possible
         generate_time = None
+        newer = False
+        page_defs = []
         for page in pages:
+            page_defs.append(page)
             if page['mtime'] > generated:
-                generate_time = self.generate_all(pages)
-                break
-        if generate_time:
+                newer = True
+
+        if newer:
+            generate_time = self.generate_all(page_defs)
             fp = open(generated_file,'w')
             fp.write(generate_time.strftime('%d/%m/%Y %H:%M:%S'));
             fp.close()
