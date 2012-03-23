@@ -1,5 +1,5 @@
 
-import logging, os
+import logging, os, errno
 from datetime import datetime
 from windmill.page import Page, Blog, HTML, Templated
 from windmill.parsers import Markdown
@@ -18,7 +18,7 @@ def list_files(base, path=[]):
     base_path = os.path.join(base, *path)
     for entry in os.listdir(base_path):
         full_path = os.path.join(base_path, entry)
-        if os.path.isdir(full_path):
+        if os.path.isdir(full_path) and entry[0:1] != '.':
             sub_path = path[:] 
             sub_path.append(entry)
             for s in list_files(base, sub_path):
@@ -115,7 +115,13 @@ class Generator:
             try:
                 rendered_file = os.path.join(self.static, *page.path)
                 log.debug('Generating File: %s' % rendered_file)
-                rfp = open(rendered_file, 'w')
+                try:
+                    rfp = open(rendered_file, 'w')
+                except IOError, e:
+                    if e.errno == errno.ENOENT:
+                        directory = os.path.dirname(rendered_file)
+                        os.makedirs(directory)
+                        rfp = open(rendered_file, 'w')
                 rfp.write(page.render())
                 rfp.close()
             except Exception, e:
@@ -123,22 +129,4 @@ class Generator:
                               ('/'.join(page.path), e))
 
         return generating_time
-
-#             # Pass 1. Create Page Objects. Weed out non Pages
-#             self.pages = []
-#             for filename, filepath, mtime in pages:
-#                  pagename, pageext = os.path.splitext(filename)
-#                  if pageext in self.parsers:
-#                      try:
-#                     
-#             # Pass 2. Assign a Template to each Page
-#             for page in self.pages:
-#                 try:
-#                     page.template = self.templates.get_template(page.template_name)
-#                 except Exception, e:
-#                     log.error('Error on page %s. (%s)' % (page.name, e))
-#             # Pass 3. Render each page onto the filesystem
-#             for page in self.pages:
-# 
-#         
 

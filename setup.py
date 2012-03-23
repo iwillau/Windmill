@@ -8,6 +8,7 @@ setup(
         'docutils>=0.3',
         'markdown',
         'mako',
+        'pytz',
     ],
 
     setup_requires = [
